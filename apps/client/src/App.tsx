@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import styled from 'styled-components';
+import { Card, Loading, Toast } from './components';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isLoading, setIsLoading] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <WrapperApp>
+      {showToast && <Toast message="Link copied" />}
+      {
+        isLoading ? <Loading /> : <Card showToaster={setShowToast} />
+      }
+      <Footer>created by <span>FernandoCM18</span> - devChallenges.io</Footer>
+    </WrapperApp>
+  );
 }
 
-export default App
+export default App;
+
+const WrapperApp = styled.div`
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100vh;
+`;
+
+const Footer = styled.footer`
+  color: #A9A9A9;
+  align-self: end;
+  margin-bottom: 24px;
+  
+  span {
+    font-weight: bold;
+  }
+`;
